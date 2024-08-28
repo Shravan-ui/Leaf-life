@@ -24,6 +24,27 @@
             background-color: #f2f2f2;
         }
     </style>
+     <datalist id="tree_species_options">
+        <option value="Oak">
+        <option value="Maple">
+        <option value="Pine">
+        <option value="Birch">
+        <option value="Willow">
+        <option value="Cedar">
+        <option value="Redwood">
+        <option value="Fir">
+        </option>
+    </datalist>
+
+    <datalist id="status_options">
+        <option value="Good">
+        <option value="Ok">
+        <option value="Bad">
+        <option value="Old">
+        <option value="Young">
+        <option value="Already Cut">
+        </option>
+    </datalist>
 </head>
 
 <body bgcolor="#ffbb3d">
@@ -31,13 +52,13 @@
 
     <form id="treeForm">
         <label for="species">Tree Species:</label>
-        <input type="text" id="species" name="species" required>
+        <input list="tree_species_options" id="species" name="species" required>
         <label for="location">Location:</label>
         <input type="text" id="location" name="location" required>
         <label for="plantingDate">Planting Date:</label>
         <input type="date" id="plantingDate" name="plantingDate" required>
         <label for="status">Status:</label>
-        <input type="text" id="status" name="status" required>
+        <input list="status_options" id="status" name="status" required>
         <label for="owner">Owner:</label>
         <input type="text" id="owner" name="owner" required>
         <button type="submit">Add Tree</button>
