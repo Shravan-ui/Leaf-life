@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv=X-UA-Compatible" content="IE=edge />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet"href="styles.css" />
-    <title>Tree Planting Tracker</title>
+	<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible&quot;" content="IE=edge />
+    <meta name=" viewport"="">
+    <link rel="stylesheet" href="styles.css">   
+   <title>Tree Planting Tracker</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -18,93 +18,101 @@
         th, td {
             text-align: left;
             padding: 8px;
-            border: 1px solid #4cd0e4;
+            border: 1px solid #ddd;
         }
         tr:nth-child(even) {
-            background-color: #09e7eb;
+            background-color: #f2f2f2;
         }
     </style>
 </head>
-<body bgcolor="#09e7eb">
+
+<body bgcolor="#ffbb3d">
     <h1>Tree Planting Tracker</h1>
 
     <form id="treeForm">
         <label for="species">Tree Species:</label>
         <input type="text" id="species" name="species" required>
-
-        <label for="status">Status:</label>
-        <input type="text" id="Status" name="Status" required>
-
-        <label for="foundby">Found by:</label>
-        <input type="text" id="found by" name="found by" required>
-        
         <label for="location">Location:</label>
         <input type="text" id="location" name="location" required>
-
         <label for="plantingDate">Planting Date:</label>
         <input type="date" id="plantingDate" name="plantingDate" required>
-
+        <label for="status">Status:</label>
+        <input type="text" id="status" name="status" required>
+        <label for="owner">Owner:</label>
+        <input type="text" id="owner" name="owner" required>
         <button type="submit">Add Tree</button>
     </form>
-
-    <table id="treeTable" border="2" name="Add">
+    <table id="treeTable">
         <thead>
             <tr>
                 <th>Species</th>
                 <th>Location</th>
                 <th>Planting Date</th>
-                <th>Status</th>
-                <th>Found by</th>
+				<th>Status</th>
+				<th>Owner</th>
             </tr>
         </thead>
         <tbody>
         </tbody>
     </table>
-
     <script>
         const treeForm = document.getElementById('treeForm');
         const treeTable = document.getElementById('treeTable');
         const tableBody = treeTable.getElementsByTagName('tbody')[0];
 
-        treeForm.addEventListener('submit'), (event) => {
+        treeForm.addEventListener('submit', (event) => {
             event.preventDefault();
 
             const species = document.getElementById('species').value;
             const location = document.getElementById('location').value;
             const plantingDate = document.getElementById('plantingDate').value;
-            const status = document.getElementById('status').value;
-            const foundby = document.getElementById('foundby').value;
+			const status = document.getElementById('status').value;
+			const owner = document.getElementById('owner').value;
+
             // Create a new table row
             const newRow = document.createElement('tr');
             const speciesCell = document.createElement('td');
             const locationCell = document.createElement('td');
             const dateCell = document.createElement('td');
-           const statusCell=document.createElement('td');
-           const  foundbyCell=document.createElement('td');
+			const statusCell = document.createElement('td');
+			const ownerCell = document.createElement('td');
 
             speciesCell.textContent = species;
             locationCell.textContent = location;
             dateCell.textContent = plantingDate;
-            statusCell.textContent = status;
-            foundby.textContent = foundby; 
+			statusCell.textContent = status;
+			ownerCell.textContent = owner;
 
             newRow.appendChild(speciesCell);
             newRow.appendChild(locationCell);
             newRow.appendChild(dateCell);
-            newRow.appendChild(status);
-            newRow.appendChild(foundby);
+			newRow.appendChild(statusCell);
+			newRow.appendChild(ownerCell);
 
-           
             tableBody.appendChild(newRow);
 
             // Clear form fields
             document.getElementById('species').value = '';
             document.getElementById('location').value = '';
             document.getElementById('plantingDate').value = '';
-            document.getElementById('status').value = '';
-            document.getElementById('foundby').value = '';
-        };
+			document.getElementById('status').value = '';
+			document.getElementById('owner').value = '';
+			
+			if (typeof(Storage) !== "undefined") {
+			// Code for localStorage/sessionStorage.
+			} else {
+			// Sorry! No Web Storage support..
+		//if not support storage I think you can append the data to the url, and parse the url after page reload
+			}
+
+            //document.getElementById("mapframe").src = "https://www.google.com/maps/place/" + location;
+
+            const baseMapUrl = "https://www.google.com/maps?q=";
+            const mapSrc = baseMapUrl + encodeURIComponent(location) + "&output=embed";
+            document.getElementById("mapIframe").src = mapSrc;
+        });
     </script>
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d248849.5666034708!2d77.46613310303192!3d12.954280226358014!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1670c9b44e6d%3A0xf8dfc3e8517e4fe0!2sBengaluru%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1724409216489!5m2!1sen!2sin" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+	<br><br><br><br><br><br><br><br><br>
+<iframe id="mapIframe" src="https://www.google.com/maps?q=triplicane&output=embed" width="1500" height="900" allowfullscreen="" loading="lazy"></iframe>
 </body>
 </html>
