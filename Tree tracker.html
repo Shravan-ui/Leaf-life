@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible&quot;" content="IE=edge />
+    <meta name=" viewport"="">
+    <link rel="stylesheet" href="styles.css">   
+   <title>Tree Planting Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            text-align: left;
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tree Planting Tracker</h1>
+
+    <form id="treeForm">
+        <label for="species">Tree Species:</label>
+        <input type="text" id="species" name="species" required>
+
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location" required>
+
+        <label for="plantingDate">Planting Date:</label>
+        <input type="date" id="plantingDate" name="plantingDate" required>
+
+        <label for="status">Status:</label>
+        <input type="text" id="status" name="status" required>
+
+        <label for="owner">Owner:</label>
+        <input type="text" id="owner" name="owner" required>
+
+        <button type="submit">Add Tree</button>
+    </form>
+
+    <table id="treeTable">
+        <thead>
+            <tr>
+                <th>Species</th>
+                <th>Location</th>
+                <th>Planting Date</th>
+	<th>Status</th>
+	<th>Owner</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <script>
+        const treeForm = document.getElementById('treeForm');
+        const treeTable = document.getElementById('treeTable');
+        const tableBody = treeTable.getElementsByTagName('tbody')[0];
+
+        treeForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            const species = document.getElementById('species').value;
+            const location = document.getElementById('location').value;
+            const plantingDate = document.getElementById('plantingDate').value;
+            const status = document.getElementById('status').value;
+            const owner = document.getElementById('owner').value;
+
+            // Create a new table row
+            const newRow = document.createElement('tr');
+            const speciesCell = document.createElement('td');
+            const locationCell = document.createElement('td');
+            const dateCell = document.createElement('td');
+            const statusCell = document.createElement('td');
+            const ownerCell = document.createElement('td');
+
+            speciesCell.textContent = species;
+            locationCell.textContent = location;
+            dateCell.textContent = plantingDate;
+            statusCell.textContent = status;
+            ownerCell.textContent = owner;
+
+            newRow.appendChild(speciesCell);
+            newRow.appendChild(locationCell);
+            newRow.appendChild(dateCell);
+            newRow.appendChild(statusCell);
+            newRow.appendChild(ownerCell);
+            
+            tableBody.appendChild(newRow);
+
+            // Clear form fields
+            document.getElementById('species').value = '';
+            document.getElementById('location').value = '';
+            document.getElementById('plantingDate').value = '';
+            document.getElementById('status').value = '';
+            document.getElementById('owner').value = '';
+        });
+    </script>
+	<iframe id="mapIframe" src="https://www.google.com/maps?q=triplicane&output=embed" width="700" height="500" allowfullscreen="" loading="lazy"></iframe>
+</body>
+</html>
